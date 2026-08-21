@@ -1,0 +1,22 @@
+import pandas as pd
+data = pd.read_csv('titanic.csv')
+
+print(data[data['Age']>=18]['Name'])
+#getting a particular column out of a condition
+print(data.loc[data['Age']>=18, 'Name']) #loc --> locate, not a function
+print(data.iloc[1::2, 1::3]) #rows, columns
+print(data['Age'])
+data['Age'] += 5
+print(data['Age'])
+data['Sex'] = data['Sex'].replace({'male':'M', 'female':'F'}) #modify/replace columns
+print(data['Sex'])
+data['Survived'] = data['Survived'].replace({0:'Died', 1:'Survived'})
+print(data['Survived'])
+#add data
+
+#calculate discount, 10% of fare and store in dataset
+data['Discount'] = data['Fare']*0.1
+print(data)
+print(data.drop('Fare', axis=1))
+
+#inplace - parameter whether changes are made in the original dataset
