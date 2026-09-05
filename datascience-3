@@ -20,3 +20,35 @@ print(data)
 print(data.drop('Fare', axis=1))
 
 #inplace - parameter whether changes are made in the original dataset
+
+#renaming columns
+data_renamed = data.rename(
+    columns={
+        "Pclass":"Passenger Class",
+        "Survived":"Alive",
+        "Parents/Children Aboard":"Parents + Kids Aboard"
+    }
+)
+print(data_renamed)
+
+#mean of ages
+print(data[['Fare', 'Age']].mean())
+
+#sorting data
+data.sort_values(by="Age", inplace = True, ascending=False)
+print(data[['Name', 'Age']])
+
+#operations on text data
+data["Name_lowercase"] = data['Name'].str.lower()
+print(data[['Name_lowercase', 'Age']])
+
+#split name
+data["surname"] = data["Name"].str.split(" ").str.get(-1)
+print(data[['surname', 'Age']])
+
+#count of people in each passenger class: value counts gives the count of each value
+print(data['Pclass'].value_counts())
+print(data.groupby('Pclass')['Name'].count())
+
+#for each male and female of each passenger class, show the minimum and maximum fare
+print(data.groupby(['Sex', 'Pclass'])['Fare'].agg([min, max]))
